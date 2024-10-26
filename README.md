@@ -20,17 +20,17 @@ This project is my first attempt at building a convolutional neural network (CNN
 ### Model Architecture
 The model is built using TensorFlow and Keras with the following architecture:
 
-1. **Input Layer**: The model accepts input images with a size of 128x128 pixels and 3 color channels (RGB).
-2. **Convolutional Layers**: The architecture includes multiple convolutional layers with increasing filter sizes. The initial layers use 32 and 64 filters, progressing to 128 and 256 filters in deeper layers. This design helps the model learn complex features from the images while maintaining spatial information.
-3. **Activation Functions**: Each convolutional layer employs the ReLU (Rectified Linear Unit) activation function, which introduces non-linearity and aids in learning complex patterns.
-4. **Batch Normalization**: After each convolutional layer, batch normalization is applied to stabilize and speed up the training process by normalizing the output of the previous layer.
-5. **Pooling Layers**: Max pooling layers are utilized to reduce the spatial dimensions of the feature maps, which helps in reducing computation and controlling overfitting.
-6. **Flattening**: After the convolutional and pooling layers, the model flattens the feature maps into a single vector to prepare for the fully connected (dense) layers.
-7. **Dense Layers**: The model features two dense layers, each with 128 neurons and ReLU activation. Dropout regularization (set at 40%) is applied after these layers to prevent overfitting by randomly setting a portion of the neurons to zero during training.
-8. **Output Layer**: The final layer is a dense layer with five neurons, each representing a different flower class. This layer uses a softmax activation function to produce a probability distribution over the classes.
-9. **L2 Regularization**: L2 regularization is applied to the convolutional and dense layers to penalize large weights and further mitigate overfitting.
-10. **Data Augmentation**: To enhance the diversity of the training dataset and reduce overfitting, data augmentation techniques such as rotation, zoom, and flipping were employed during training.
-11. **Compilation**: The model is compiled using the Adam optimizer with a reduced learning rate for stability, and it employs categorical cross-entropy as the loss function, which is suitable for multi-class classification tasks.
+1. **Input Layer**: The model accepts input images with a size of 128x128 pixels and 3 color channels (RGB). <br><br>
+2. **Convolutional Layers**: The architecture includes multiple convolutional layers with increasing filter sizes. The initial layers use 32 and 64 filters, progressing to 128 and 256 filters in deeper layers. This design helps the model learn complex features from the images while maintaining spatial information.<br><br>
+3. **Activation Functions**: Each convolutional layer employs the ReLU (Rectified Linear Unit) activation function, which introduces non-linearity and aids in learning complex patterns.<br><br>
+4. **Batch Normalization**: After each convolutional layer, batch normalization is applied to stabilize and speed up the training process by normalizing the output of the previous layer.<br><br>
+5. **Pooling Layers**: Max pooling layers are utilized to reduce the spatial dimensions of the feature maps, which helps in reducing computation and controlling overfitting.<br><br>
+6. **Flattening**: After the convolutional and pooling layers, the model flattens the feature maps into a single vector to prepare for the fully connected (dense) layers.<br><br>
+7. **Dense Layers**: The model features two dense layers, each with 128 neurons and ReLU activation. Dropout regularization (set at 40%) is applied after these layers to prevent overfitting by randomly setting a portion of the neurons to zero during training.<br><br>
+8. **Output Layer**: The final layer is a dense layer with five neurons, each representing a different flower class. This layer uses a softmax activation function to produce a probability distribution over the classes.<br><br>
+9. **L2 Regularization**: L2 regularization is applied to the convolutional and dense layers to penalize large weights and further mitigate overfitting.<br><br>
+10. **Data Augmentation**: To enhance the diversity of the training dataset and reduce overfitting, data augmentation techniques such as rotation, zoom, and flipping were employed during training.<br><br>
+11. **Compilation**: The model is compiled using the Adam optimizer with a reduced learning rate for stability, and it employs categorical cross-entropy as the loss function, which is suitable for multi-class classification tasks.<br><br>
 12. **Callbacks**: During training, callbacks such as learning rate reduction on plateaus and early stopping are implemented to optimize training efficiency and prevent overfitting.
 
 ## Optimization Insights
