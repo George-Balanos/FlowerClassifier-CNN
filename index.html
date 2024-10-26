@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CNN Flower Recognition</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #0077ff;
+            margin: 0;
+        }
+
+        .container {
+            text-align: center;
+            background-color: white;
+            padding: 40px;
+            border-radius: 10px;
+            box-shadow: 0 0 15px rgb(0, 238, 255);
+        }
+
+        input[type="file"] {
+            margin-top: 20px;
+        }
+
+        #image-preview {
+            display: none; 
+            width: 80%;
+            height: 80%;
+        }
+
+        #image-wrapper{
+
+            display: flex;
+
+            justify-content: center;
+            align-items: center;
+
+            margin-top: 20px;
+            width: 100%;
+            height: 300px;
+            overflow: hidden;
+
+            border: 2px dotted #000000;
+            border-radius: 1%;
+        }
+
+        #result {
+            margin-top: 20px;
+            font-size: 1.2em;
+            color: #333;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>CNN Flower Recognition</h1>
+        <p>Please upload a flower image (JPG):</p>
+        <input type="file" id="file-input" accept=".jpg,.jpeg">
+        <div id="image-wrapper">
+            <img id="image-preview" src="#" alt="Image Preview">
+        </div>
+        <div id="result">Prediction result will appear here.</div>
+    </div>
+
+    <script>
+        const fileInput = document.getElementById('file-input');
+        const imagePreview = document.getElementById('image-preview');
+        const result = document.getElementById('result');
+
+        fileInput.addEventListener('change', async function(event) {
+            const file = event.target.files[0];
+
+            // Only process jpg images
+            if (file && file.type.match('image/jpeg')) {
+                const reader = new FileReader();
+
+                reader.onload = async function(e) {
+                    imagePreview.src = e.target.result;
+                    imagePreview.style.display = 'block';
+
+                    // Convert image to base64
+                    const base64Image = e.target.result.split(',')[1]; // Strip out the data URL prefix
+
+                    // Show "Predicting..." message
+                    result.textContent = "Predicting...";
+
+                    // Send the image to the Flask server
+                    try {
+                        const response = await fetch('http://127.0.0.1:5000/predict', {
+                            method: 'POST',
+                            headers: { 'Content-Type': 'application/json' },
+                            body: JSON.stringify({ image: base64Image })
+                        });
+
+                        const data = await response.json();
+                        result.textContent = `Prediction: ${data.prediction}`;
+                    } catch (error) {
+                        console.error("Error:", error);
+                        result.textContent = "Error making prediction";
+                    }
+                };
+
+                reader.readAsDataURL(file);  // Read file as base64 URL
+            } else {
+                result.textContent = "Please upload a valid JPG image.";
+                imagePreview.style.display = 'none';
+            }
+        });
+    </script>
+</body>
+</html>
