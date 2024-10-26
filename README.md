@@ -33,7 +33,8 @@ The model is built using TensorFlow and Keras with the following architecture:
 11. **Compilation**: The model is compiled using the Adam optimizer with a reduced learning rate for stability, and it employs categorical cross-entropy as the loss function, which is suitable for multi-class classification tasks.<br><br>
 12. **Callbacks**: During training, callbacks such as learning rate reduction on plateaus and early stopping are implemented to optimize training efficiency and prevent overfitting.
 
-Kaggle NoteBook: https://www.kaggle.com/code/georgempal/flower-image-classification
+## Kaggle NoteBook: 
+- https://www.kaggle.com/code/georgempal/flower-image-classification
 
 ## Optimization Insights
 * I noticed that the optimization(Adam optimizer) step played a crucial role in the model's performance. In the beginning, the model often overshot optimal solutions due to an aggressive learning rate. To address this, I modified the learning rate dynamically during training, which helped stabilize the convergence and improve overall accuracy.
